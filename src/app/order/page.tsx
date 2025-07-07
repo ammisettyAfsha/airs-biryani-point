@@ -50,7 +50,19 @@ export default function OrderPage() {
 
   return (
     <div className="p-6">
-      <h1 className="text-3xl font-bold mb-6">Order Online</h1>
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-3xl font-bold">Order Online</h1>
+
+        {/* Cart Button */}
+        <button className="relative bg-yellow-700 text-white px-4 py-2 rounded hover:bg-yellow-800">
+          🛒 Cart
+          {cart.length > 0 && (
+            <span className="absolute -top-2 -right-2 bg-white text-yellow-700 text-xs font-bold px-2 py-0.5 rounded-full">
+              {cart.reduce((sum, item) => sum + item.quantity, 0)}
+            </span>
+          )}
+        </button>
+      </div>
 
       {/* Product List */}
       <div className="grid gap-6 md:grid-cols-3">
