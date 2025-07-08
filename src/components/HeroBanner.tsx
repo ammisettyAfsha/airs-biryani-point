@@ -18,7 +18,7 @@ export default function Header() {
 
         {/* Right Side */}
         <div className="text-center md:text-right space-y-2 max-w-md">
-          <h2 className="text-lg font-bold uppercase">🥗 We want to serve fresh food</h2>
+          <h2 className="text-lg font-bold uppercase">🥗 We want to serve fresh Biryani</h2>
 
           <p className="text-sm font-medium">
             🕗 <span className="underline">Taking orders:</span>{' '}
