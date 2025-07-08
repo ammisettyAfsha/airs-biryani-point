@@ -2,7 +2,7 @@
 import React from 'react';
 
 const biryanis = [
-  { name: 'Veg Biryani', price: '$9.99', image: '/veg.jpg' },
+  { name: 'Veg Biryani', price: '$9.99', image: '/veg.avif' },
   { name: 'Chicken Biryani', price: '$12.99', image: '/chicken.png' },
   { name: 'Prawns Biryani', price: '$14.99', image: '/prawns.png' },
 ];

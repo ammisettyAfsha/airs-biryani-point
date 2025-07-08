@@ -1,4 +1,5 @@
 'use client';
+import SubmitButton from '@/src/components/SubmitButton';
 import React, { useState } from 'react';
 
 const menuItems = [
@@ -140,6 +141,13 @@ export default function OrderPage() {
           </ul>
         )}
       </div>
+      <SubmitButton
+        cart={cart}
+         menuItems={menuItems}
+        getTotal={getTotal}
+        clearCart={() => setCart([])}
+          />
+      
     </div>
   );
 }
