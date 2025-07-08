@@ -1,6 +1,6 @@
 
 
-import Image from "next/image";
+
 import HeroBanner from "../components/HeroBanner";
 import MenuPreview from "../components/MenuPreview";
 import Footer from "../components/Footer";

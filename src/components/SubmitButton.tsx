@@ -10,6 +10,7 @@ type MenuItem = {
   id: number;
   name: string;
   price: number;
+  image: string;
 };
 
 type Props = {
@@ -18,6 +19,7 @@ type Props = {
   getTotal: () => string;
   clearCart: () => void;
 };
+
 
 export default function SubmitButton({ cart, menuItems, getTotal, clearCart }: Props) {
   const [loading, setLoading] = useState(false);

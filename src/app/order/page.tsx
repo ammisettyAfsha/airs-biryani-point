@@ -4,9 +4,9 @@ import Image from 'next/image';
 import SubmitButton from '@/src/components/SubmitButton';
 
 const menuItems = [
-  { id: 1, name: 'Veg Biryani', price: 9.99, image: '/veg.jpg' },
+  { id: 1, name: 'Veg Biryani', price: 9.99, image: '/veg.avif' },
   { id: 2, name: 'Chicken Biryani', price: 12.99, image: '/chicken.png' },
-  { id: 3, name: 'Prawns Biryani', price: 14.99, image: '/prawns.jpg' },
+  { id: 3, name: 'Prawns Biryani', price: 14.99, image: '/prawns.png' },
 ];
 
 export default function OrderPage() {
@@ -129,7 +129,7 @@ export default function OrderPage() {
                     </div>
                   </div>
                   <span className="font-medium">
-                    ${(menuItem!.price * item.quantity).toFixed(2)}
+                    ${(menuItem?.price ?? 0 * item.quantity).toFixed(2)}
                   </span>
                 </li>
               );

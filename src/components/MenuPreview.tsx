@@ -1,5 +1,6 @@
-// MenuPreview.tsx
+'use client';
 import React from 'react';
+import Image from 'next/image';
 
 const biryanis = [
   { name: 'Veg Biryani', price: '$9.99', image: '/veg.avif' },
@@ -14,10 +15,12 @@ export default function MenuPreview() {
       <div className="grid gap-6 md:grid-cols-3">
         {biryanis.map((item, i) => (
           <div key={i} className="shadow-lg rounded-lg overflow-hidden">
-            <img
+            <Image
               src={item.image}
               alt={item.name}
-              className="h-78 w-full object-cover"
+              width={400} // ✅ Required
+              height={250} // ✅ Required
+              className="w-full h-64 object-cover"
             />
             <div className="p-4">
               <h3 className="text-xl font-medium">{item.name}</h3>
