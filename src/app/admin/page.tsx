@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-// ✅ Define the types explicitly
 type OrderItem = {
   name: string;
   quantity: number;
@@ -10,7 +9,7 @@ type OrderItem = {
 };
 
 type Order = {
-  id: string; // "001", "002", etc.
+  id: string;
   customer: string;
   items: OrderItem[];
   total: string;
@@ -18,7 +17,7 @@ type Order = {
 
 export default function AdminDashboard() {
   const router = useRouter();
-  const [orders, setOrders] = useState<Order[]>([]); // ✅ Properly typed
+  const [orders, setOrders] = useState<Order[]>([]); // ✅ No 'any' here
 
   useEffect(() => {
     const isAuth = localStorage.getItem('admin-auth');
@@ -32,16 +31,18 @@ export default function AdminDashboard() {
       try {
         const parsed: unknown = JSON.parse(storedOrders);
 
-        // ✅ Type check before using
         if (Array.isArray(parsed)) {
-          const validOrders = parsed.filter((order): order is Order =>
-            typeof order === 'object' &&
-            order !== null &&
-            'id' in order &&
-            'customer' in order &&
-            'items' in order &&
-            'total' in order
-          );
+          const validOrders: Order[] = parsed.map((order) => ({
+            id: String(order.id),
+            customer: String(order.customer),
+            items: (order.items || []).map((item: any): OrderItem => ({
+              name: String(item.name),
+              quantity: Number(item.quantity),
+              price: Number(item.price),
+            })),
+            total: String(order.total),
+          }));
+
           setOrders(validOrders);
         }
       } catch (error) {
