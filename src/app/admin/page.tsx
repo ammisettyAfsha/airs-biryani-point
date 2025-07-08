@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-// ✅ Define TypeScript types instead of using `any`
+// ✅ Define the types explicitly
 type OrderItem = {
   name: string;
   quantity: number;
@@ -10,7 +10,7 @@ type OrderItem = {
 };
 
 type Order = {
-  id: string; // Keep as string for formatted ID like "001"
+  id: string; // "001", "002", etc.
   customer: string;
   items: OrderItem[];
   total: string;
@@ -18,7 +18,7 @@ type Order = {
 
 export default function AdminDashboard() {
   const router = useRouter();
-  const [orders, setOrders] = useState<Order[]>([]); // ✅ Typed
+  const [orders, setOrders] = useState<Order[]>([]); // ✅ Properly typed
 
   useEffect(() => {
     const isAuth = localStorage.getItem('admin-auth');
@@ -27,13 +27,25 @@ export default function AdminDashboard() {
       return;
     }
 
-    const savedOrdersString = localStorage.getItem('orders');
-    if (savedOrdersString) {
+    const storedOrders = localStorage.getItem('orders');
+    if (storedOrders) {
       try {
-        const parsedOrders: Order[] = JSON.parse(savedOrdersString);
-        setOrders(parsedOrders);
+        const parsed: unknown = JSON.parse(storedOrders);
+
+        // ✅ Type check before using
+        if (Array.isArray(parsed)) {
+          const validOrders = parsed.filter((order): order is Order =>
+            typeof order === 'object' &&
+            order !== null &&
+            'id' in order &&
+            'customer' in order &&
+            'items' in order &&
+            'total' in order
+          );
+          setOrders(validOrders);
+        }
       } catch (error) {
-        console.error('Error parsing orders from localStorage', error);
+        console.error('Failed to parse orders from localStorage:', error);
       }
     }
   }, [router]);
