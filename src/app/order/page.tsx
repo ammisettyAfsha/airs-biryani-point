@@ -1,6 +1,7 @@
 'use client';
-import SubmitButton from '@/src/components/SubmitButton';
 import React, { useState } from 'react';
+import Image from 'next/image';
+import SubmitButton from '@/src/components/SubmitButton';
 
 const menuItems = [
   { id: 1, name: 'Veg Biryani', price: 9.99, image: '/veg.jpg' },
@@ -68,13 +69,12 @@ export default function OrderPage() {
       {/* Product List */}
       <div className="grid gap-6 md:grid-cols-3">
         {menuItems.map(item => (
-          <div
-            key={item.id}
-            className="border rounded-lg shadow p-4 text-center"
-          >
-            <img
+          <div key={item.id} className="border rounded-lg shadow p-4 text-center">
+            <Image
               src={item.image}
               alt={item.name}
+              width={400}
+              height={300}
               className="h-40 w-full object-cover rounded"
             />
             <h2 className="text-xl font-semibold mt-2">{item.name}</h2>
@@ -141,13 +141,14 @@ export default function OrderPage() {
           </ul>
         )}
       </div>
+
+      {/* Submit Button */}
       <SubmitButton
         cart={cart}
-         menuItems={menuItems}
+        menuItems={menuItems}
         getTotal={getTotal}
         clearCart={() => setCart([])}
-          />
-      
+      />
     </div>
   );
 }
